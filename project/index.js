@@ -18,7 +18,8 @@ const [features, labels] = loadData(`./otu.csv`);
 
 
 // Initialize KNN classifier and train the model
-const knn = new KNN(features, labels, {k: 3}); // Adjust k value as needed
+const k = 3; // Adjust k value as needed
+const knn = new KNN(features, labels, {k});
 
 // Split the dataset into training and testing sets ,
 const assumeTraining = 0.7; // 70% training and 30% testing data
@@ -33,6 +34,8 @@ const trainPredictions = X_train.map(dataPoint => knn.predict(dataPoint));
 const testPredictions = X_test.map(dataPoint => knn.predict(dataPoint));
 
 // Print the output for train data
+console.log(`For K = ${k} and and Assume Training = ${assumeTraining}\n`);
+
 const trainAccuracy = calculateAccuracy(trainPredictions, y_train);
 console.log('Train Data Accuracy:', trainAccuracy);
 const trainSensitivity = calculateSensitivity(trainPredictions, y_train);
